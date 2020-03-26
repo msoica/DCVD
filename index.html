@@ -213,8 +213,10 @@
     </div>
 </div>
 <script>
+        document.getElementById('data').valueAsDate = new Date();
+
     async function genereaza() {
-        const {degrees, PDFDocument, rgb, StandardFonts} = PDFLib;
+        const {PDFDocument, StandardFonts} = PDFLib;
         let objData = {
             subsemnatul: document.getElementById("subsemnatul").value,
             prenumeTata: document.getElementById("prenumeTata").value,
@@ -465,7 +467,8 @@
             });
         }
         let currentData = objData.data;
-        currentData  = currentData.split('/');
+        if (currentData.indexOf('/') !== -1)currentData = currentData.split('/');
+        if (currentData.indexOf('-') !== -1)currentData = currentData.split('-');
         firstPage.drawText(currentData[2], {
             x: 157,
             y: 195,
